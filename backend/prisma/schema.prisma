@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -15,25 +12,24 @@ datasource db {
 }
 
 model Course {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
-  userId      String    @db.ObjectId
-  purchaseId  String?   @db.ObjectId
+  userId      String   @db.ObjectId
+  purchaseId  String?  @db.ObjectId
   created_by  String
-  created_at  DateTime  @default(now())
-  updated_at  DateTime  @updatedAt
-  user        User      @relation(fields: [userId], references: [id])
-  Purchase    Purchase? @relation(fields: [purchaseId], references: [id])
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+  purchase    Purchase? @relation("CourseToPurchase", fields: [purchaseId], references: [id])
 }
 
 model User {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  username String     @unique
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  username String   @unique
   password String
   email    String
   courses  Course[]
-  Purchase Purchase[]
 }
 
 model Admin {
@@ -44,13 +40,8 @@ model Admin {
 }
 
 model Purchase {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  purchase_date DateTime @default(now())
-  amount        Float
-  status        String
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-  userId        String   @db.ObjectId
-  user          User     @relation(fields: [userId], references: [id])
-  Course        Course[]
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  amount  Float
+  purchased_at DateTime @default(now())
+  courses Course[] @relation("CourseToPurchase")
 }
