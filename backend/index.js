@@ -26,6 +26,10 @@ app.get('/get_all_courses', (req, res) => {
   // route for getting current user info
 })
 
+app.get('/get_purchased_courses', (req, res) => {
+  // route for getting current user info
+})
+
 
 
 app.listen(port, () => {
