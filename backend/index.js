@@ -6,9 +6,27 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('me/', (req, res) => {
+app.get('/me', (req, res) => {
   // route for getting current user info
 })
+
+app.post('/login', (req, res) => {
+  // route for getting current user info
+})
+
+app.post('/signup', (req, res) => {
+  // route for getting current user info
+})
+
+app.post('/post_a_courses', (req, res) => {
+  // route for getting current user info
+})
+
+app.get('/get_all_courses', (req, res) => {
+  // route for getting current user info
+})
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
