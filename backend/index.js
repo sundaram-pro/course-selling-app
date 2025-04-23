@@ -12,10 +12,12 @@ app.get('/me', (req, res) => {
 
 app.post('/login', (req, res) => {
   // route for getting current user info
+  //For both user and admin login
 })
 
 app.post('/signup', (req, res) => {
   // route for getting current user info
+  //For both user and admin signup
 })
 
 app.post('/post_a_courses', (req, res) => {
@@ -29,6 +31,20 @@ app.get('/get_all_courses', (req, res) => {
 app.get('/get_purchased_courses', (req, res) => {
   // route for getting current user info
 })
+
+app.post('/admin/create_a_course', (req, res) => {
+  // route for getting current user info
+})
+
+app.post('/admin/add_course_content', (req, res) => {
+  // route for getting current user info
+})
+
+app.delete('/admin/delete_a_course', (req, res) => {
+  // route for getting current user info
+})
+
+
 
 
 
