@@ -36,6 +36,11 @@ app.post('/admin/create_a_course', (req, res) => {
   // route for getting current user info
 })
 
+
+app.put('/admin/edit_course', (req, res) => {
+  // route for getting current user info
+})
+
 app.post('/admin/add_course_content', (req, res) => {
   // route for getting current user info
 })
