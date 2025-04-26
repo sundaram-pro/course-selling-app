@@ -1,5 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// This is your Prisma schema file
+// Learn more at: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -11,37 +11,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Course {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  description String
-  userId      String   @db.ObjectId
-  purchaseId  String?  @db.ObjectId
-  created_by  String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  user        User     @relation(fields: [userId], references: [id])
-  purchase    Purchase? @relation("CourseToPurchase", fields: [purchaseId], references: [id])
-}
-
 model User {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   username String   @unique
   password String
   email    String
-  courses  Course[]
+  courses  Course[] // Relation: One user can have many courses
 }
 
 model Admin {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String @unique
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  username String   @unique
   password String
   email    String
 }
 
+model Course {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  userId      String    @db.ObjectId
+  purchaseId  String?   @db.ObjectId
+  created_by  String
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id])
+  purchase    Purchase? @relation("CourseToPurchase", fields: [purchaseId], references: [id])
+}
+
 model Purchase {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  amount  Float
-  purchased_at DateTime @default(now())
-  courses Course[] @relation("CourseToPurchase")
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  amount       Float
+  purchased_at DateTime  @default(now())
+
+  // Relations
+  courses      Course[]  @relation("CourseToPurchase")
 }
